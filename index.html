@@ -386,8 +386,13 @@
         }
     });
 
-    function handleScreenClick() {
-        if (!isWaiting) {
+function handleScreenClick() {
+        if (isWaiting) {
+            // 【安全網】如果已經答對且鍵盤收起來了，點擊螢幕任何地方都可以直接進入下一題
+            currentIdx++;
+            nextQuestion();
+        } else {
+            // 如果還沒答對，點螢幕就幫忙抓回焦點，強制喚出鍵盤
             inputEl.focus();
         }
     }
