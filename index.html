@@ -8,7 +8,14 @@
         :root { --bg: #000; --text: #fff; --accent: #00ff00; --gray: #444; --light-gray: #888; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; overflow: hidden; touch-action: manipulation; }
         
-        .screen { display: none; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .screen { display: none; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-start; /* 從置中改為靠頂部對齊 */
+    padding-top: 15vh;           /* 讓整體畫面與頂部保持 15% 螢幕高度的距離（你可以自由調整這個數字） */
+    box-sizing: border-box;      /* 確保 padding 不會撐破螢幕高度 */
+    height: 100vh; 
+    text-align: center; }
         .active { display: flex; }
 
         /* 首頁 */
