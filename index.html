@@ -334,31 +334,22 @@
         inputEl.blur();
     }
 
-// 下一題 (修正 meaning 殘影與極速聚焦)
-    function nextQuestion() {
-        // 1. 先把上一題的狀態和顯示完全清空與隱藏
-        meaningEl.classList.remove('show');
-        visualEl.innerText = "";
-        inputEl.value = "";
-        isWaiting = false;
-
-        // 2. 檢查是否結束
+function nextQuestion() {
         if (currentIdx >= currentQuizList.length) {
             alert("練習結束！");
             goHome(new Event('click'));
             return;
         }
-
-        // 3. 確定完全清空後，再塞入新題目的文字
         const data = currentQuizList[currentIdx];
         wordEl.innerText = data.q;
         wordEl.style.color = "white";
         meaningEl.innerText = data.m;
+        meaningEl.classList.remove('show');
+        visualEl.innerText = "";
+        inputEl.value = "";
+        isWaiting = false;
         
-        // 4. 極速聚焦唤出鍵盤
-        setTimeout(() => {
-            inputEl.focus();
-        }, 20); // 微調至 20ms，留給瀏覽器足夠的時間渲染隱藏動作，同時確保鍵盤不收起
+        setTimeout(() => inputEl.focus(), 10);
     }
 
     // 處理輸入判定 (等候 Enter 狀態)
