@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Kana Master Pro</title>
     <style>
-        :root { --bg: #000; --text: #fff; --accent: #00ff00; --gray: #444; --light-gray: #888; }
+        :root { --bg: #000; --text: #fff; --accent: #00ff00; --gray: #444; --light-gray: #888; --coffee: #ffdd00; }
         body { margin: 0; background: var(--bg); color: var(--text); font-family: sans-serif; overflow: hidden; touch-action: manipulation; }
         
         .screen { 
@@ -20,7 +20,7 @@
         }
         .active { display: flex; }
 
-/* 首頁 */
+        /* 首頁 */
         h1 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 30px; color: var(--light-gray); }
         .menu-btn { 
             background: transparent; border: 1px solid var(--gray); color: var(--text);
@@ -38,7 +38,7 @@
             font-size: 0.95rem;
             margin-top: 25px; /* 與上方按鈕拉開一點距離 */
         }
-        
+
         /* 模式切換按鈕組 */
         .toggle-group { margin-bottom: 20px; display: flex; gap: 5px; }
         .toggle-btn { 
@@ -99,6 +99,9 @@
         <button class="menu-btn" onclick="startQuiz('hira')">平假名單字 (500)</button>
         <button class="menu-btn" onclick="startQuiz('kata')">片假名單字 (500)</button>
         <button class="menu-btn" style="border-color: var(--accent); color: var(--accent);" onclick="openSelectScreen()">自選五十音模式</button>
+        
+        <!-- 新增：Buy Me a Coffee 贊助按鈕 -->
+        <a class="menu-btn coffee-btn" href="https://www.buymeacoffee.com/你的使用者名稱" target="_blank" rel="noopener noreferrer">☕ Buy me a coffee</a>
     </div>
 
     <div id="select-screen" class="screen">
@@ -212,7 +215,7 @@
                 { label: "か行", items: [{q:"か",a:"ka"},{q:"き",a:"ki"},{q:"く",a:"ku"},{q:"け",a:"ke"},{q:"こ",a:"ko"}] },
                 { label: "さ行", items: [{q:"さ",a:"sa"},{q:"し",a:"shi"},{q:"す",a:"su"},{q:"せ",a:"se"},{q:"そ",a:"so"}] },
                 { label: "た行", items: [{q:"た",a:"ta"},{q:"ち",a:"chi"},{q:"つ",a:"tsu"},{q:"て",a:"te"},{q:"と",a:"to"}] },
-                { label: "な行", items: [{q:"な",a:"na"},{q:"に",a:"ni"},{q:"ぬ",a:"nu"},{q:"ね",a:"ne"},{q:"の",a:"no"}] },
+                { label: "な行", items: [{q:"な",a:"na"},{q:"に",a:"ni"},{q:"ぬ",a:"nu"},{q:"ね",a:"ne"},{q:"ノ",a:"no"}] },
                 { label: "は行", items: [{q:"は",a:"ha"},{q:"ひ",a:"hi"},{q:"ふ",a:"fu"},{q:"へ",a:"he"},{q:"ほ",a:"ho"}] },
                 { label: "ま行", items: [{q:"ま",a:"ma"},{q:"み",a:"mi"},{q:"む",a:"mu"},{q:"め",a:"me"},{q:"も",a:"mo"}] },
                 { label: "や行", items: [{q:"や",a:"ya"},{q:"ゆ",a:"yu"},{q:"よ",a:"yo"}] },
@@ -230,14 +233,14 @@
                 { label: "きゃ行", items: [{q:"きゃ",a:"kya"},{q:"きゅ",a:"kyu"},{q:"きょ",a:"kyo"}] },
                 { label: "しゃ行", items: [{q:"しゃ",a:"sha"},{q:"しゅ",a:"shu"},{q:"しょ",a:"sho"}] },
                 { label: "ちゃ行", items: [{q:"ちゃ",a:"cha"},{q:"ちゅ",a:"chu"},{q:"ちょ",a:"cho"}] },
-                { label: "にゃ行", items: [{q:"にゃ",a:"nya"},{q:"にゅ",a:"nyu"},{q:"niょ",a:"nyo"}] },
+                { label: "にゃ行", items: [{q:"にゃ",a:"nya"},{q:"にゅ",a:"nyu"},{q:"にょ",a:"nyo"}] },
                 { label: "ひゃ行", items: [{q:"ひゃ",a:"hya"},{q:"ひゅ",a:"hyu"},{q:"ひょ",a:"hyo"}] },
                 { label: "みゃ行", items: [{q:"みゃ",a:"mya"},{q:"みゅ",a:"myu"},{q:"みょ",a:"myo"}] },
                 { label: "りゃ行", items: [{q:"りゃ",a:"rya"},{q:"りゅ",a:"ryu"},{q:"りょ",a:"ryo"}] },
                 { label: "ぎゃ行", items: [{q:"ぎゃ",a:"gya"},{q:"ぎゅ",a:"gyu"},{q:"ぎょ",a:"gyo"}] },
                 { label: "じゃ行", items: [{q:"じゃ",a:"ja"},{q:"じゅ",a:"ju"},{q:"じょ",a:"jo"}] },
                 { label: "びゃ行", items: [{q:"びゃ",a:"bya"},{q:"びゅ",a:"byu"},{q:"びょ",a:"byo"}] },
-                { label: "ぴゃ行", items: [{q:"ぴゃ",a:"pya"},{q:"ぴゅ",a:"pyu"},{q:"ぴょ",a:"pyo"}] }
+                { label: "ぴゃ行", items: [{q:"ぴゃ",a:"pya"},{q:"ぴゅ",a:"pyu"},{q:"ぴょ",a:"pya"}] }
             ]
         },
         kata: {
@@ -256,8 +259,8 @@
             dakuon: [
                 { label: "ガ行", items: [{q:"ガ",a:"ga"},{q:"ギ",a:"gi"},{q:"グ",a:"gu"},{q:"ゲ",a:"ge"},{q:"ゴ",a:"go"}] },
                 { label: "ザ行", items: [{q:"ザ",a:"za"},{q:"ジ",a:"ji"},{q:"ズ",a:"zu"},{q:"ゼ",a:"ze"},{q:"ゾ",a:"zo"}] },
-                { label: "ダ行", items: [{q:"ダ",a:"da"},{q:"ヂ",a:"di"},{q:"ヅ",a:"du"},{q:"デ",a:"de"},{q:"ド",a:"do"}] },
-                { label: "バ行", items: [{q:"バ",a:"ba"},{q:"ビ",a:"bi"},{q:"ブ",a:"bu"},{q:"べ",a:"be"},{q:"ボ",a:"bo"}] },
+                { label: "ダ行", items: [{q:"ダ",a:"da"},{q:"ヂ",a:"di"},{q:"づ",a:"du"},{q:"デ",a:"de"},{q:"ド",a:"do"}] },
+                { label: "バ行", items: [{q:"バ",a:"ba"},{q:"ビ",a:"bi"},{q:"ブ",a:"bu"},{q:"ベ",a:"be"},{q:"ボ",a:"bo"}] },
                 { label: "パ行", items: [{q:"パ",a:"pa"},{q:"ピ",a:"pi"},{q:"プ",a:"pu"},{q:"ペ",a:"pe"},{q:"ポ",a:"po"}] }
             ],
             youon: [
@@ -265,13 +268,13 @@
                 { label: "シャ行", items: [{q:"シャ",a:"sha"},{q:"シュ",a:"shu"},{q:"ショ",a:"sho"}] },
                 { label: "チャ行", items: [{q:"チャ",a:"cha"},{q:"チュ",a:"chu"},{q:"チョ",a:"cho"}] },
                 { label: "ニャ行", items: [{q:"ニャ",a:"nya"},{q:"ニュ",a:"nyu"},{q:"ニョ",a:"nyo"}] },
-                { label: "ヒャ行", items: [{q:"ヒャ",a:"hya"},{q:"ヒュ",a:"hyu"},{q:"ヒょ",a:"hyo"}] },
+                { label: "ヒャ行", items: [{q:"ヒャ",a:"hya"},{q:"ヒュ",a:"hyu"},{q:"ヒョ",a:"hyo"}] },
                 { label: "ミャ行", items: [{q:"ミャ",a:"mya"},{q:"ミュ",a:"myu"},{q:"ミョ",a:"myo"}] },
-                { label: "リャ行", items: [{q:"リャ",a:"rya"},{q:"リュ",a:"ryu"},{q:"リょ",a:"ryo"}] },
+                { label: "リャ行", items: [{q:"リャ",a:"rya"},{q:"リュ",a:"ryu"},{q:"リョ",a:"ryo"}] },
                 { label: "ギャ行", items: [{q:"ギャ",a:"gya"},{q:"ギュ",a:"gyu"},{q:"ギョ",a:"gyo"}] },
-                { label: "じゃ行", items: [{q:"ジャ",a:"ja"},{q:"ジュ",a:"ju"},{q:"ジョ",a:"jo"}] },
+                { label: "ジャ行", items: [{q:"ジャ",a:"ja"},{q:"ジュ",a:"ju"},{q:"ジョ",a:"jo"}] },
                 { label: "ビャ行", items: [{q:"ビャ",a:"bya"},{q:"ビュ",a:"byu"},{q:"ビョ",a:"byo"}] },
-                { label: "ピャ行", items: [{q:"ピャ",a:"pya"},{q:"ピュ",a:"pyu"},{q:"ピョ",a:"pie"}] }
+                { label: "ピャ行", items: [{q:"ピャ",a:"pya"},{q:"ピュ",a:"pyu"},{q:"ピョ",a:"pya"}] }
             ]
         }
     };
@@ -312,10 +315,9 @@
     function createCheckboxElement(cat, sub, index, label) {
         const btn = document.createElement('div');
         btn.className = 'checkbox-btn';
-        btn.id = `btn-${cat}-${sub}-${index}`; // 加入特定 ID 方便批次全選控制
+        btn.id = `btn-${cat}-${sub}-${index}`; 
         btn.innerText = label;
         
-        // 檢查如果原本就已被選中，維持亮起狀態
         if (selectedGroups[cat][sub].includes(index)) {
             btn.classList.add('checked');
         }
@@ -337,18 +339,15 @@
         }
     }
 
-    // 新增：區域批次全選 / 清空功能
     function bulkSelect(cat, sub, shouldSelectAll) {
         const maxCount = kanaGroups[cat][sub].length;
         
-        // 1. 更新資料狀態
         if (shouldSelectAll) {
             selectedGroups[cat][sub] = Array.from({length: maxCount}, (_, i) => i);
         } else {
             selectedGroups[cat][sub] = [];
         }
 
-        // 2. 更新網頁上的按鈕外觀
         for (let i = 0; i < maxCount; i++) {
             const btn = document.getElementById(`btn-${cat}-${sub}-${i}`);
             if (btn) {
@@ -432,7 +431,6 @@
         inputEl.blur();
     }
 
-    // 下一題 (徹底解決 meaning 閃爍與殘影問題)
     function nextQuestion() {
         if (currentIdx >= currentQuizList.length) {
             alert("練習結束！");
