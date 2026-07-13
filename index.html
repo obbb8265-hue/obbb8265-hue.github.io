@@ -20,12 +20,23 @@
         }
         .active { display: flex; }
 
-        /* 首頁 */
+/* 首頁 */
         h1 { font-size: 1.2rem; letter-spacing: 4px; margin-bottom: 30px; color: var(--light-gray); }
         .menu-btn { 
             background: transparent; border: 1px solid var(--gray); color: var(--text);
             padding: 15px; margin: 8px; font-size: 1.1rem; border-radius: 8px; width: 220px;
             cursor: pointer;
+            text-decoration: none; /* 確保 a 標籤按鈕沒有底線 */
+            display: inline-block;
+            box-sizing: border-box;
+        }
+        
+        /* 贊助按鈕樣式 */
+        .coffee-btn {
+            border-color: var(--coffee);
+            color: var(--coffee);
+            font-size: 0.95rem;
+            margin-top: 25px; /* 與上方按鈕拉開一點距離 */
         }
         
         /* 模式切換按鈕組 */
