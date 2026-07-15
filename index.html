@@ -228,31 +228,28 @@
         <button class="menu-btn action-btn" onclick="startCustomQuiz()">開始測驗！</button>
     </div>
 
-    <!-- 測驗螢幕：加上 event.target 判斷，防範點到底部 -->
-    <div id="quiz-screen" class="screen" onclick="handleScreenClick(event)">
-        <button class="back-btn" onclick="goHome(event)">BACK</button>
-        <div id="word">...</div>
-        <div id="visual-input"></div>
-        <div id="meaning">意思</div>
-        <input type="text" id="input-field" autofocus autocomplete="off" autocapitalize="none" spellcheck="false">
-        <div class="hint-text">答對後按 [Return / Enter] 繼續</div>
-    </div>
-
-<!-- PROTECTED INTERACTION FOOTER BLOCK -->
-<div class="footer-area" 
-     onmousedown="event.stopPropagation()" 
-     onclick="event.stopPropagation()" 
-     ontouchstart="event.stopPropagation()">
+<!-- 測驗螢幕 -->
+<div id="quiz-screen" class="screen" onclick="handleScreenClick(event)">
+    <button class="back-btn" onclick="goHome(event)">BACK</button>
+    <div id="word">...</div>
+    <div id="visual-input"></div>
+    <div id="meaning">意思</div>
+    <input type="text" id="input-field" autofocus autocomplete="off" autocapitalize="none" spellcheck="false">
+    <div class="hint-text">答對後按 [Return / Enter] 繼續</div>
     
-    <!-- 1. 黃色高亮超連結，移至廣告欄上方，並連結至個人專屬網址 -->
-    <p class="support-text">
-        Enjoy the practice? Support the project at 
-        <a href="https://buymeacoffee.com/oveh111" target="_blank">https://buymeacoffee.com/</a>
-    </p>
-    
-
-</div>
-
+    <!-- 將 PROTECTED FOOTER 與廣告容器整齊收納在 quiz-screen 內 -->
+    <div class="footer-area" 
+         onmousedown="event.stopPropagation()" 
+         onclick="event.stopPropagation()" 
+         ontouchstart="event.stopPropagation()">
+        
+        <!-- 1. 贊助連結 -->
+        <p class="support-text">
+            Enjoy the practice? Support the project at 
+            <a href="https://buymeacoffee.com/oveh111" target="_blank">https://buymeacoffee.com/</a>
+        </p>
+        
+        <!-- 2. 廣告容器放進 footer-area 內（或緊跟在後，並確保層級正確） -->
         <div class="adsense-container">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301375383922304" crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
@@ -265,7 +262,8 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
-    </div>
+    </div> <!-- 關閉 footer-area -->
+</div> <!-- 關閉 quiz-screen -->
 
 <script>
     const database = {
