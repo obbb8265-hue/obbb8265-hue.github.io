@@ -80,39 +80,46 @@
         
         .action-btn { background: var(--accent); color: #000; border: none; font-weight: bold; margin-top: 5px; }
 
-/* 底部支持文字樣式（強制獨立點擊層級） */
-        .support-text {
-            position: fixed;
-            bottom: 100px; 
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #FFDD00; 
-            z-index: 99999 !important; /* 確保在最最最上層 */
-            background: rgba(0, 0, 0, 0.8);
-            padding: 6px 0;
-            letter-spacing: 0.5px;
-            pointer-events: auto !important; /* 強制重新啟用點擊，不被 body 影響 */
-        }
-
-        /* 底部廣告欄位樣式 */
-        .adsense-container {
+        /* 統一底部區塊的外層容器，完全獨立於所有 screen 之外 */
+        .footer-area {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
+            z-index: 999999 !important; /* 確保在所有人最上面 */
+            background: rgba(0, 0, 0, 0.9);
+            pointer-events: auto !important; /* 確保點擊事件正常 */
+        }
+
+        /* 底部支持文字樣式 */
+        .support-text {
+            width: 100%;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #FFDD00; 
+            padding: 10px 0;
+            letter-spacing: 0.5px;
+            pointer-events: auto !important;
+        }
+        .support-text a {
+            color: #FFDD00 !important;
+            text-decoration: underline !important;
+            font-weight: bold;
+            pointer-events: auto !important;
+        }
+
+        /* 底部廣告欄位樣式 */
+        .adsense-container {
+            width: 100%;
             height: 100px;
             text-align: center;
-            z-index: 99999 !important; 
-            background: rgba(0, 0, 0, 0.8); 
             box-sizing: border-box;
             padding-top: 5px;
-            pointer-events: auto !important; 
+            pointer-events: auto !important;
         }
         
         /* 避免提示文字被支持連結與廣告遮擋，將其再往上推 */
-        .hint-text { position: fixed; bottom: 150px !important; font-size: 0.8rem; color: #444; letter-spacing: 1px; }
+        .hint-text { position: fixed; bottom: 160px !important; font-size: 0.8rem; color: #444; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -203,13 +210,37 @@
         <button class="menu-btn action-btn" onclick="startCustomQuiz()">開始測驗！</button>
     </div>
 
-    <div id="quiz-screen" class="screen" onclick="handleScreenClick()">
+    <!-- 測驗螢幕：加上 event.target 判斷，防範點到底部 -->
+    <div id="quiz-screen" class="screen" onclick="handleScreenClick(event)">
         <button class="back-btn" onclick="goHome(event)">BACK</button>
         <div id="word">...</div>
         <div id="visual-input"></div>
         <div id="meaning">意思</div>
         <input type="text" id="input-field" autofocus autocomplete="off" autocapitalize="none" spellcheck="false">
         <div class="hint-text">答對後按 [Return / Enter] 繼續</div>
+    </div>
+
+    <!-- 💡 核心修正：將支持文字與廣告打包入獨立的底部容器中，徹底阻絕點擊事件干擾 -->
+    <div class="footer-area" onmousedown="event.stopPropagation();" onclick="event.stopPropagation();" ontouchstart="event.stopPropagation();">
+        <div class="support-text">
+            Enjoy the practice? Support the project at 
+            <a href="https://buymeacoffee.com/oveh111" target="_blank" rel="noopener noreferrer">
+                https://buymeacoffee.com/
+            </a>
+        </div>
+
+        <div class="adsense-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301375383922304" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-5301375383922304"
+                 data-ad-slot="5111372785"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </div>
 
 <script>
@@ -288,7 +319,7 @@
             youon: [
                 { label: "キャ行", items: [{q:"キャ",a:"kya"},{q:"キュ",a:"kyu"},{q:"キョ",a:"kyo"}] },
                 { label: "シャ行", items: [{q:"シャ",a:"sha"},{q:"シュ",a:"shu"},{q:"ショ",a:"sho"}] },
-                { label: "チャ行", items: [{q:"チャ",a:"cha"},{q:"チュ",a:"chu"},{q:"チョ",a:"cho"}] },
+                { label: "チャ行", items: [{q:"チャ",a:"cha"},{q:"チュ",a:"chu"},{q:"ちょ",a:"cho"}] },
                 { label: "ニャ行", items: [{q:"ニャ",a:"nya"},{q:"ニュ",a:"nyu"},{q:"ニョ",a:"nyo"}] },
                 { label: "ヒャ行", items: [{q:"ヒャ",a:"hya"},{q:"ヒュ",a:"hyu"},{q:"ヒょ",a:"hyo"}] },
                 { label: "ミャ行", items: [{q:"ミャ",a:"mya"},{q:"ミュ",a:"myu"},{q:"ミョ",a:"myo"}] },
@@ -447,7 +478,7 @@
     }
 
     function goHome(event) {
-        event.stopPropagation();
+        if (event) event.stopPropagation();
         homeScreen.classList.add('active');
         quizScreen.classList.remove('active');
         inputEl.blur();
@@ -456,7 +487,7 @@
     function nextQuestion() {
         if (currentIdx >= currentQuizList.length) {
             alert("練習結束！");
-            goHome(new Event('click'));
+            goHome();
             return;
         }
 
@@ -507,7 +538,11 @@
         }
     });
 
-    function handleScreenClick() {
+    // 💡 核心防護：如果點擊發生在底部 footer-area 中，直接不執行測驗點擊
+    function handleScreenClick(event) {
+        if (event.target.closest('.footer-area')) {
+            return; // 直接略過，不搶焦點
+        }
         if (isWaiting) {
             currentIdx++;
             nextQuestion();
@@ -516,30 +551,6 @@
         }
     }
 </script>
-
-<!-- 支持本專案文字連結（徹底攔截事件，不讓測驗程式抓到點擊） -->
-<div class="support-text" onmousedown="event.stopPropagation();" onclick="event.stopPropagation();" ontouchstart="event.stopPropagation();">
-    Enjoy the practice? Support the project at 
-    <a href="https://buymeacoffee.com/oveh111" target="_blank" rel="noopener noreferrer" style="color: #FFDD00; text-decoration: underline; font-weight: bold;">
-        https://buymeacoffee.com/
-    </a>
-</div>
-
-<!-- 網頁底部 Google AdSense 廣告區塊 -->
-<div class="adsense-container">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5301375383922304"
-     crossorigin="anonymous"></script>
-<!-- react -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5301375383922304"
-     data-ad-slot="5111372785"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
 
 </body>
 </html>
