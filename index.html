@@ -525,9 +525,9 @@
     }
 </script>
 
-<!-- 支持本專案文字連結（置於廣告欄之上，防止點擊事件穿透） -->
-<div class="support-text" onclick="event.stopPropagation()">
-    Enjoy the practice? Support the project at <a href="https://buymeacoffee.com/oveh111" target="_blank" rel="noopener noreferrer">https://buymeacoffee.com/</a>
+<!-- 支持本專案文字連結（加入強制開啟新分頁的 JS 動作） -->
+<div class="support-text" style="cursor: pointer;" onclick="event.stopPropagation(); window.open('https://buymeacoffee.com/oveh111', '_blank');">
+    Enjoy the practice? Support the project at <span style="text-decoration: underline; font-weight: bold;">https://buymeacoffee.com/</span>
 </div>
 
 <!-- 網頁底部 Google AdSense 廣告區塊 -->
