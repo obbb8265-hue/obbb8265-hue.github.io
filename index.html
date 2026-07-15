@@ -80,35 +80,50 @@
         
         .action-btn { background: var(--accent); color: #000; border: none; font-weight: bold; margin-top: 5px; }
 
-/* 修正底部的贊助與廣告區塊容器 */
+/* 宣告黃色霓虹變數 */
+:root {
+    /* ... 其它變數 */
+    --yellow-accent: #ffd700;
+}
+
+/* 確保底部排版緊貼且高度適當 */
 .footer-area {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 6px 12px;         /* 🛑 降低上下 padding（原本可能過大），縮小佔用高度 */
-    background-color: #0d0d0d;  /* 保持與背景色一致 */
+    padding: 8px 16px 12px 16px;
+    background-color: #0d0d0f;
+    border-top: 1px solid #1c1c24;
     box-sizing: border-box;
-    z-index: 999;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px; /* 縮小兩者間距 */
 }
 
-/* 針對這句 BuyMeACoffee 文字的獨立調整 */
+/* 調整贊助文字外觀 */
 .support-text {
-    font-size: 11px;            /* 稍微縮小字體，降低視覺突兀感 */
-    color: #888888;             /* 使用低調的灰色 */
-    margin: 2px 0 4px 0;        /* 🛑 嚴格限制上下外邊距（margin），避免把文字撐得太高 */
+    font-size: 12px;
+    color: #bbbbbb;
+    margin: 0;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.4;
 }
 
+/* 將超連結設定為亮黃色，並伴隨低調的虛底下底線 */
 .support-text a {
-    color: #00ffcc;             /* 霓虹綠的超連結顏色 */
+    color: var(--yellow-accent);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    border-bottom: 1px dashed var(--yellow-accent);
+    padding-bottom: 1px;
 }
 
 .support-text a:hover {
-    text-decoration: underline;
+    color: #ffffff;
+    border-bottom-style: solid;
 }
 
         /* 底部廣告欄位樣式 */
